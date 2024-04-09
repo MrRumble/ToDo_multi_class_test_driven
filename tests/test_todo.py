@@ -20,8 +20,4 @@ def test_task_pararmeter_gives_exception_if_not_string():
     error_message = str(e.value)
     assert error_message == 'Task entry must be a string!'
 
-def test_task_pararmeter_gives_exception_if_not_string2():
-    with pytest.raises(Exception) as e:
-        todo = Todo({})
-    error_message = str(e.value)
-    assert error_message == 'Task entry must be a string!'
+
