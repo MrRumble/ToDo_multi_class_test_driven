@@ -43,13 +43,44 @@ def test_return_incomplete_tasks_with_two_todos_one_incomplete():
     result = todo_list.incomplete()
     assert result == [todo2]  
 
-def test_return_message_with_none_incomplete():
+
+def test_complete_tasks_return_one_complete_task():
     todo_list = TodoList()
     todo = Todo('Task to complete')
-    todo2 = Todo('Another task.')
     todo_list.add(todo)
-    todo_list.add(todo2) ###### I GAVE UP HERE
     todo.mark_complete()
+    result = todo_list.complete()
+    assert result == [todo]
+
+
+def test_complete_tasks_return_three_complete_tasks():
+    todo_list = TodoList()
+    todo1 = Todo('Task to complete')
+    todo2 = Todo('Task to complete 2')
+    todo3 = Todo('Task to complete 3')
+    todo_list.add(todo1)
+    todo_list.add(todo2)
+    todo_list.add(todo3)
+    todo1.mark_complete()
     todo2.mark_complete()
-    result = todo_list.incomplete()
-    assert result == 'All tasks have been completed!'  
+    todo3.mark_complete()
+    result = todo_list.complete()
+    assert result == [todo1, todo2, todo3]
+
+def test_give_up_marks_one_task_complete():
+    todo_list = TodoList()
+    todo1 = Todo('Task tp complete')
+    todo_list.add(todo1)
+    todo_list.give_up()
+    result = todo1.is_task_complete
+    assert result == True
+
+def test_give_up_marks_two_tasks_complete():
+    todo_list = TodoList()
+    todo1 = Todo('Task tp complete')
+    todo2 = Todo('Task tp complete')
+    todo_list.add(todo1)
+    todo_list.add(todo2)
+    todo_list.give_up()
+    result = todo1.is_task_complete and todo2.is_task_complete
+    assert result == True
